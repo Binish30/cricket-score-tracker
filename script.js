@@ -2,11 +2,26 @@ let ballNumber = 1; // Initialize ball number
 let totalRuns = 0; // Initialize total runs
 let totalBalls = 0; // Initialize total balls for overs
 let currentOver = 1; // Initialize current over
+let overs; // Store the number of overs
+let firstBallOfOver = true; // Track the first ball of the current over
+
+// Function to get the correct suffix for the over
+function getOverSuffix(over) {
+    if (over % 10 === 1 && over % 100 !== 11) {
+        return "st";
+    } else if (over % 10 === 2 && over % 100 !== 12) {
+        return "nd";
+    } else if (over % 10 === 3 && over % 100 !== 13) {
+        return "rd";
+    } else {
+        return "th";
+    }
+}
 
 // Event listener for setting the number of overs
 document.getElementById('setOversButton').addEventListener('click', () => {
     const oversInput = document.getElementById('oversInput'); // Get the overs input field
-    const overs = parseInt(oversInput.value); // Parse the input value as an integer
+    overs = parseInt(oversInput.value); // Parse the input value as an integer
 
     // Validate the input for overs
     if (isNaN(overs) || overs < 1) {
@@ -20,6 +35,9 @@ document.getElementById('setOversButton').addEventListener('click', () => {
     document.getElementById('updateScoreButton').style.display = 'block'; // Show the update button
     document.getElementById('totalScore').style.display = 'block'; // Show total score heading
     document.getElementById('oversInputSection').style.display = 'none'; // Hide overs input section
+
+    // Display the initial current over
+    document.getElementById('currentOverDisplay').textContent = `Current Over: ${currentOver}${getOverSuffix(currentOver)} Over`;
 });
 
 // Event listener for updating the score
@@ -56,12 +74,13 @@ document.getElementById('updateScoreButton').addEventListener('click', () => {
     if (ballNumber > 6) {
         ballNumber = 1; // Reset ball number for the next over
         currentOver++; // Move to the next over
-        document.getElementById('currentOverDisplay').textContent = `Current Over: ${currentOver}`; // Update current over display
+        document.getElementById('currentOverDisplay').textContent = `Current Over: ${currentOver}${getOverSuffix(currentOver)} Over`; // Update current over display
     }
 
     // Disable button after total balls are reached
     if ((currentOver - 1) * 6 + ballNumber > totalBalls) {
         document.getElementById('updateScoreButton').disabled = true; // Disable button
+        document.getElementById('currentOverDisplay').textContent = `Overs Completed`; // Display overs completed
         alert('End of overs! Total Score: ' + totalRuns); // Alert end of overs
     }
 
