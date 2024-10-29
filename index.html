@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cricket Score Tracker</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Cricket Score Tracker</h1>
+        <h2 id="currentOverDisplay">Current Over: 0</h2> <!-- Display current over -->
+        <div id="oversInputSection">
+            <input type="number" id="oversInput" placeholder="Enter number of overs" min="1"> <!-- Input for overs -->
+            <button id="setOversButton">Set Overs</button> <!-- Button to set overs -->
+        </div>
+        <div id="ballDisplay"></div> <!-- Section to display ball numbers -->
+        <table id="scoreTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Ball Number</th>
+                    <th>Number of Runs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added here -->
+            </tbody>
+        </table>
+        <input type="number" id="runInput" placeholder="Enter runs" min="0" max="6" style="display: none;"> <!-- Input for runs -->
+        <button id="updateScoreButton" style="display: none;">Update Score</button> <!-- Button to update score -->
+        <h2 id="totalScore" style="display: none;">Total Score: 0</h2> <!-- Display total score -->
+    </div>
+    <script src="script.js"></script> <!-- Link to the JavaScript file -->
+</body>
+</html>
